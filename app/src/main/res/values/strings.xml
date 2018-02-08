@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="no_titile">No Titile</string>
+    <string name="no_description">No Description</string>
+
+
+    <string name="connection_error">Please check the internet connection</string>
+
+    <string name="something_went_wrong">Something went wrong</string>
+</resources>
