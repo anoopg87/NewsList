@@ -5,6 +5,7 @@ import com.assesment.magazineapp.R;
 import com.assesment.model.Facts;
 import com.assesment.model.Row;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -12,6 +13,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
+
+import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import io.reactivex.plugins.RxJavaPlugins;
@@ -30,6 +33,20 @@ public class NewsListActivityPresenterTest {
 
     @Mock
     NewsListActivityView newsListActivityView;
+
+    @Inject
+
+
+
+    @Before
+    public void setup(){
+
+        /*TestNewsListComponent testNewsListComponent= DaggerAppComponent.builder().
+                appModule(new AppModule(this))
+                .okHttpModule(new OkHttpModule())
+                .retrofitModule(new RetrofitModule(Constant.BASE_URL))
+                .webServiceModule(new WebServiceModule());*/
+    }
 
 
 
@@ -58,7 +75,7 @@ public class NewsListActivityPresenterTest {
         facts.setRows(Arrays.asList(new Row(),new Row(),new Row()));
         Flowable<Facts> fac=Flowable.just(facts);
 
-        NewsListActivityPresenter presenter=new NewsListActivityPresenter(newsListActivityView, Schedulers.trampoline());
+        NewsListActivityPresenter presenter=new NewsListActivityPresenter(newsListActivityView);
         RxJavaPlugins.setIoSchedulerHandler(schedules-> Schedulers.io());
 
         Mockito.when(newsRepository.loadNews()).thenReturn(fac);
@@ -71,7 +88,7 @@ public class NewsListActivityPresenterTest {
 
     @Test public void shouldPassErrorMessageToView()  {
 
-        NewsListActivityPresenter presenter=new NewsListActivityPresenter(newsListActivityView, Schedulers.trampoline());
+        NewsListActivityPresenter presenter=new NewsListActivityPresenter(newsListActivityView);
         RxJavaPlugins.setIoSchedulerHandler(schedules-> Schedulers.io());
 
         Mockito.when(newsRepository.loadNews()).thenThrow(new Throwable());
